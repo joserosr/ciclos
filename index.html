@@ -166,7 +166,7 @@
             const currentYear = currentDate.getFullYear();
             let birthday = new Date(currentYear, birthMonth - 1, birthDay);
             
-            // Ajustar la fecha de cumpleaños al próximo año si ya pasó en el año actual
+            // Ajustar la fecha de cumpleaños al año siguiente si ya pasó en el año actual
             if (birthday < currentDate) {
                 birthday.setFullYear(currentYear + 1);
             }
@@ -176,23 +176,23 @@
             
             const periods = [];
 
-            planets.forEach((planet, index) => {
+            for (let i = 0; i < planets.length; i++) {
                 const startDate = new Date(birthday);
-                startDate.setDate(birthday.getDate() + (index * 52));
+                startDate.setDate(birthday.getDate() + (i * 52));
                 
-                const endDate = new Date(birthday);
-                endDate.setDate(birthday.getDate() + ((index + 1) * 52 - 1));
+                const endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + 51); // Un ciclo dura 52 días, por lo que el último día es el 51 después del inicio
                 
                 const isCurrentPeriod = currentDate >= startDate && currentDate <= endDate;
 
                 periods.push({
-                    planet,
+                    planet: planets[i],
                     startDate,
                     endDate,
                     isCurrentPeriod,
-                    index
+                    index: i
                 });
-            });
+            }
 
             // Ordenar los períodos para mostrar primero el período actual y luego los futuros
             const sortedPeriods = periods.sort((a, b) => a.startDate - b.startDate);
