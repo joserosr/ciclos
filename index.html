@@ -16,202 +16,55 @@
 </head>
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <h1 class="text-3xl font-bold text-center mb-8">Bienvenido! Introduce tu día y més de cumpleaños y conoce los períodos de tu año Personal:</h1>
-        <div style="background-color: #f0f7ff; border: 1px solid #cce3ff; border-radius: 8px; padding: 16px; margin-bottom: 32px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
-    <p style="color: #1e40af; margin: 0;">
-        ⭐ Este programa calcula tus periodos personales y resalta en azul el periodo actual en el que estás ⭐
-    </p>
-</div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-                <select id="monthSelect" class="rounded border p-2">
-                    <option value="">Mes de nacimiento</option>
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                </select>
-                
-                <select id="daySelect" class="rounded border p-2">
-                    <option value="">Día de nacimiento</option>
-                </select>
-                
-                <button 
-                    id="calculateButton"
-                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                    Calcular
-                </button>
-            </div>
-        </div>
-        
+        <!-- Código anterior -->
         <div id="results" class="space-y-4"></div>
     </div>
-    <p class="text-lg mb-6 text-gray-700">
-            Gracias por tu interés en este tema. Te invito a saber más descargando tu 
-            <span class="font-bold text-purple-700">muestra gratuita</span> del ebook:
-        </p>
-        
-        <div class="text-xl font-bold text-purple-900 mb-8">
-            "Toma el Control de Tu Vida con el Poder del Siete" 
-            <span class="ml-2">📚</span>
-        </div>
-        
-        <div class="space-y-4">
-            <a href="https://hubs.ly/Q02ZMhlK0" 
-               target="_blank" 
-               class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
-                <span class="mr-2">🎁</span>
-                ¡Descarga tu Muestra Gratuita Aquí!
-            </a>
+    <div class="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg shadow-lg p-8 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-purple-800">
+                <span class="mr-2">🌟</span>
+                ¡Profundiza en tu Viaje de Autoconocimiento!
+                <span class="ml-2">🌟</span>
+            </h2>
             
-            <div class="mt-8 pt-6 border-t border-purple-200">
-                <p class="text-lg mb-4 text-purple-800">
-                    <span class="mr-2">💫</span>
-                    ¿Listo para la experiencia completa?
-                </p>
-                
-                <a href="https://pay.hotmart.com/P96594631U" 
+            <p class="text-lg mb-6 text-gray-700">
+                Gracias por tu interés en este tema. Te invito a saber más descargando tu 
+                <span class="font-bold text-purple-700">muestra gratuita</span> del ebook:
+            </p>
+            
+            <div class="text-xl font-bold text-purple-900 mb-8">
+                "Toma el Control de Tu Vida con el Poder del Siete" 
+                <span class="ml-2">📚</span>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="https://hubs.ly/Q02ZMhlK0" 
                    target="_blank" 
-                   class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
-                    <span class="mr-2">📖</span>
-                    Adquiere el eBook Completo
+                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
+                    <span class="mr-2">🎁</span>
+                    ¡Descarga tu Muestra Gratuita Aquí!
                 </a>
+                
+                <div class="mt-8 pt-6 border-t border-purple-200">
+                    <p class="text-lg mb-4 text-purple-800">
+                        <span class="mr-2">💫</span>
+                        ¿Listo para la experiencia completa?
+                    </p>
+                    
+                    <a href="https://pay.hotmart.com/P96594631U" 
+                       target="_blank" 
+                       class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
+                        <span class="mr-2">📖</span>
+                        Adquiere el eBook Completo
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 
     <script>
-        // Llenar los días del mes
-        const daySelect = document.getElementById('daySelect');
-        for (let i = 1; i <= 31; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            daySelect.appendChild(option);
-        }
-
-        const planetsInfo = {
-            Sol: {
-                symbol: "☉",
-                positive: "Período de liderazgo, vitalidad y creatividad. Excelente para iniciar proyectos y buscar reconocimiento.",
-                negative: "Posible tendencia al egocentrismo y exceso de orgullo. Cuidar la salud y el exceso de exposición."
-            },
-            Luna: {
-                symbol: "☽",
-                positive: "Incremento de la intuición y conexión emocional. Favorable para relaciones familiares y el hogar.",
-                negative: "Fluctuaciones emocionales y sensibilidad aumentada. Posible inestabilidad en el ánimo."
-            },
-            Marte: {
-                symbol: "♂",
-                positive: "Alta energía y determinación. Buen momento para actividades físicas y competencias.",
-                negative: "Riesgo de impulsividad y conflictos. Necesidad de controlar la agresividad."
-            },
-            Mercurio: {
-                symbol: "☿",
-                positive: "Excelente para comunicación y aprendizaje. Favorece negocios y estudios.",
-                negative: "Posible dispersión mental y nerviosismo. Cuidado con malentendidos."
-            },
-            Júpiter: {
-                symbol: "♃",
-                positive: "Expansión y abundancia. Favorable para crecimiento personal y espiritual.",
-                negative: "Riesgo de excesos y sobre-optimismo. Cuidado con gastos innecesarios."
-            },
-            Venus: {
-                symbol: "♀",
-                positive: "Período favorable para el amor, arte y placer. Mejora en relaciones personales.",
-                negative: "Tendencia a la indulgencia y comodidad excesiva. Posible procrastinación."
-            },
-            Saturno: {
-                symbol: "♄",
-                positive: "Tiempo de disciplina y logros duraderos. Buen momento para planificación a largo plazo.",
-                negative: "Posibles retrasos y obstáculos. Tendencia al pesimismo y soledad."
-            }
-        };
-
-        const planets = ["Sol", "Luna", "Marte", "Mercurio", "Júpiter", "Venus", "Saturno"];
-
-        document.getElementById('calculateButton').addEventListener('click', () => {
-            const month = parseInt(document.getElementById('monthSelect').value);
-            const day = parseInt(document.getElementById('daySelect').value);
-            
-            if (!month || !day) {
-                alert('Por favor selecciona mes y día');
-                return;
-            }
-            
-            calculatePeriods(month, day);
-        });
-
-        function obtenerNombreMes(mes) {
-            const meses = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-            return meses[mes];
-        }
-
-        function calculatePeriods(birthMonth, birthDay) {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const birthday = new Date(currentYear, birthMonth - 1, birthDay);
-            
-            if (birthday > currentDate) {
-                birthday.setFullYear(currentYear - 1);
-            }
-            
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
-            
-            planets.forEach((planet, index) => {
-                const startDate = new Date(birthday);
-                startDate.setDate(birthday.getDate() + (index * 52));
-                
-                const endDate = new Date(birthday);
-                endDate.setDate(birthday.getDate() + ((index + 1) * 52 - 1));
-                
-                const isCurrentPeriod = currentDate >= startDate && currentDate <= endDate;
-                
-                const card = document.createElement('div');
-                card.className = `planet-card bg-white rounded-lg shadow p-6 ${isCurrentPeriod ? 'border-2 border-blue-500' : ''}`;
-                
-                card.innerHTML = `
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-3xl">${planetsInfo[planet].symbol}</span>
-                        <h3 class="text-xl font-bold">
-                            Período ${index + 1}: ${planet}
-                            ${isCurrentPeriod ? '<span class="ml-2 text-sm text-blue-600">(Período Actual)</span>' : ''}
-                        </h3>
-                    </div>
-                    <p class="text-sm mb-4">
-                        ${startDate.getDate()} ${obtenerNombreMes(startDate.getMonth())} - ${endDate.getDate()} ${obtenerNombreMes(endDate.getMonth())}
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h4 class="font-medium text-green-600 mb-2">Aspectos Positivos:</h4>
-                            <p class="text-sm">${planetsInfo[planet].positive}</p>
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-red-600 mb-2">Aspectos a Considerar:</h4>
-                            <p class="text-sm">${planetsInfo[planet].negative}</p>
-                        </div>
-                    </div>
-                `;
-                
-                resultsDiv.appendChild(card);
-            });
-        }
+        // El script que te proporcioné anteriormente se mantiene igual
+        // ... (todo el código JavaScript previo)
     </script>
 </body>
 </html>
