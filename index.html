@@ -1,202 +1,113 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido! Introduce tu día y més de cumpleaños y conoce los períodos de tu año Personal:</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <style>
-        .planet-card {
-            transition: transform 0.2s;
-        }
-        .planet-card:hover {
-            transform: translateY(-5px);
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <h1 class="text-3xl font-bold text-center mb-8 text-blue-700">Bienvenido! Introduce tu día y més de cumpleaños y conoce los períodos de tu año Personal:</h1>
-        <div style="background-color: #f0f7ff; border: 1px solid #cce3ff; border-radius: 8px; padding: 16px; margin-bottom: 32px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
-    <p style="color: #1e40af; margin: 0;">
-        ⭐ Este programa calcula tus periodos personales y resalta en azul el periodo actual en el que estás ⭐
-    </p>
-</div>
+function calculatePeriods(birthMonth, birthDay) {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const birthday = new Date(currentYear, birthMonth - 1, birthDay);
+    
+    if (birthday > currentDate) {
+        birthday.setFullYear(currentYear - 1);
+    }
+    
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
+    
+    // Identificar el período actual
+    let currentPeriodIndex = -1;
+    
+    planets.forEach((planet, index) => {
+        const yearBirthday = new Date(currentYear, birthMonth - 1, birthDay);
+        let startDate, endDate;
         
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-                <select id="monthSelect" class="rounded border p-2">
-                    <option value="">Mes de nacimiento</option>
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                </select>
-                
-                <select id="daySelect" class="rounded border p-2">
-                    <option value="">Día de nacimiento</option>
-                </select>
-                
-                <button 
-                    id="calculateButton"
-                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                    Calcular
-                </button>
-            </div>
-        </div>
+        if (index === 0) {
+            // Período 1 (Sol): desde el cumpleaños hasta 52 días después
+            startDate = new Date(yearBirthday);
+            endDate = new Date(yearBirthday);
+            endDate.setDate(yearBirthday.getDate() + 52);
+        } else if (index === 6) {
+            // Período 7 (Saturno): desde 53 días antes del cumpleaños hasta un día antes
+            startDate = new Date(yearBirthday);
+            startDate.setDate(yearBirthday.getDate() - 53);
+            endDate = new Date(yearBirthday);
+            endDate.setDate(yearBirthday.getDate() - 1);
+        } else {
+            // Períodos intermedios
+            startDate = new Date(yearBirthday);
+            startDate.setDate(yearBirthday.getDate() + (index * 52));
+            
+            endDate = new Date(yearBirthday);
+            endDate.setDate(yearBirthday.getDate() + ((index + 1) * 52 - 1));
+        }
         
-        <div id="results" class="space-y-4"></div>
-    </div>
-    <!-- Resto del HTML original -->
-
-    <script>
-        // Llenar los días del mes
-        const daySelect = document.getElementById('daySelect');
-        for (let i = 1; i <= 31; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            daySelect.appendChild(option);
+        const isCurrentPeriod = 
+            currentDate >= startDate && 
+            currentDate <= endDate;
+        
+        if (isCurrentPeriod) {
+            currentPeriodIndex = index;
         }
-
-        const planetsInfo = {
-            Sol: {
-                symbol: "☉",
-                positive: "Período de liderazgo, vitalidad y creatividad. Excelente para iniciar proyectos y buscar reconocimiento.",
-                negative: "Posible tendencia al egocentrismo y exceso de orgullo. Cuidar la salud y el exceso de exposición."
-            },
-            Luna: {
-                symbol: "☽",
-                positive: "Incremento de la intuición y conexión emocional. Favorable para relaciones familiares y el hogar.",
-                negative: "Fluctuaciones emocionales y sensibilidad aumentada. Posible inestabilidad en el ánimo."
-            },
-            Marte: {
-                symbol: "♂",
-                positive: "Alta energía y determinación. Buen momento para actividades físicas y competencias.",
-                negative: "Riesgo de impulsividad y conflictos. Necesidad de controlar la agresividad."
-            },
-            Mercurio: {
-                symbol: "☿",
-                positive: "Excelente para comunicación y aprendizaje. Favorece negocios y estudios.",
-                negative: "Posible dispersión mental y nerviosismo. Cuidado con malentendidos."
-            },
-            Júpiter: {
-                symbol: "♃",
-                positive: "Expansión y abundancia. Favorable para crecimiento personal y espiritual.",
-                negative: "Riesgo de excesos y sobre-optimismo. Cuidado con gastos innecesarios."
-            },
-            Venus: {
-                symbol: "♀",
-                positive: "Período favorable para el amor, arte y placer. Mejora en relaciones personales.",
-                negative: "Tendencia a la indulgencia y comodidad excesiva. Posible procrastinación."
-            },
-            Saturno: {
-                symbol: "♄",
-                positive: "Tiempo de disciplina y logros duraderos. Buen momento para planificación a largo plazo.",
-                negative: "Posibles retrasos y obstáculos. Tendencia al pesimismo y soledad."
-            }
-        };
-
-        const planets = ["Sol", "Luna", "Marte", "Mercurio", "Júpiter", "Venus", "Saturno"];
-
-        document.getElementById('calculateButton').addEventListener('click', () => {
-            const month = parseInt(document.getElementById('monthSelect').value);
-            const day = parseInt(document.getElementById('daySelect').value);
+    });
+    
+    // Mostrar períodos desde el actual hacia adelante hasta el anterior
+    if (currentPeriodIndex !== -1) {
+        for (let i = currentPeriodIndex; i < planets.length; i++) {
+            const yearBirthday = new Date(currentYear, birthMonth - 1, birthDay);
+            const planet = planets[i];
             
-            if (!month || !day) {
-                alert('Por favor selecciona mes y día');
-                return;
-            }
+            let startDate, endDate;
             
-            calculatePeriods(month, day);
-        });
-
-        function calculatePeriods(birthMonth, birthDay) {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const birthday = new Date(currentYear, birthMonth - 1, birthDay);
-            
-            if (birthday > currentDate) {
-                birthday.setFullYear(currentYear - 1);
-            }
-            
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
-            
-            // Años a mostrar: anterior, actual y siguiente
-            const yearsToShow = [currentYear - 1, currentYear, currentYear + 1];
-            
-            yearsToShow.forEach(year => {
-                const yearBirthday = new Date(year, birthMonth - 1, birthDay);
+            if (i === 0) {
+                // Período 1 (Sol): desde el cumpleaños hasta 52 días después
+                startDate = new Date(yearBirthday);
+                endDate = new Date(yearBirthday);
+                endDate.setDate(yearBirthday.getDate() + 52);
+            } else if (i === 6) {
+                // Período 7 (Saturno): desde 53 días antes del cumpleaños hasta un día antes
+                startDate = new Date(yearBirthday);
+                startDate.setDate(yearBirthday.getDate() - 53);
+                endDate = new Date(yearBirthday);
+                endDate.setDate(yearBirthday.getDate() - 1);
+            } else {
+                // Períodos intermedios
+                startDate = new Date(yearBirthday);
+                startDate.setDate(yearBirthday.getDate() + (i * 52));
                 
-                planets.forEach((planet, index) => {
-                    let startDate, endDate;
-                    
-                    if (index === 0) {
-                        // Período 1 (Sol): desde el cumpleaños hasta 52 días después
-                        startDate = new Date(yearBirthday);
-                        endDate = new Date(yearBirthday);
-                        endDate.setDate(yearBirthday.getDate() + 52);
-                    } else if (index === 6) {
-                        // Período 7 (Saturno): desde 53 días antes del cumpleaños hasta un día antes
-                        startDate = new Date(yearBirthday);
-                        startDate.setDate(yearBirthday.getDate() - 53);
-                        endDate = new Date(yearBirthday);
-                        endDate.setDate(yearBirthday.getDate() - 1);
-                    } else {
-                        // Períodos intermedios
-                        startDate = new Date(yearBirthday);
-                        startDate.setDate(yearBirthday.getDate() + (index * 52));
-                        
-                        endDate = new Date(yearBirthday);
-                        endDate.setDate(yearBirthday.getDate() + ((index + 1) * 52 - 1));
-                    }
-                    
-                    const isCurrentPeriod = 
-                        currentDate >= startDate && 
-                        currentDate <= endDate && 
-                        year === currentYear;
-                    
-                    const card = document.createElement('div');
-                    card.className = `planet-card bg-white rounded-lg shadow p-6 ${isCurrentPeriod ? 'border-2 border-blue-500' : ''}`;
-                    
-                    card.innerHTML = `
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="text-3xl">${planetsInfo[planet].symbol}</span>
-                            <h3 class="text-xl font-bold">
-                                Período ${index + 1}: ${planet} (${year})
-                                ${isCurrentPeriod ? '<span class="ml-2 text-sm text-blue-600">(Período Actual)</span>' : ''}
-                            </h3>
-                        </div>
-                        <p class="text-sm mb-4">
-                            ${startDate.toLocaleDateString('es-ES')} - ${endDate.toLocaleDateString('es-ES')}
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 class="font-medium text-green-600 mb-2">Aspectos Positivos:</h4>
-                                <p class="text-sm">${planetsInfo[planet].positive}</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-red-600 mb-2">Aspectos a Considerar:</h4>
-                                <p class="text-sm">${planetsInfo[planet].negative}</p>
-                            </div>
-                        </div>
-                    `;
-                    
-                    resultsDiv.appendChild(card);
-                });
-            });
+                endDate = new Date(yearBirthday);
+                endDate.setDate(yearBirthday.getDate() + ((i + 1) * 52 - 1));
+            }
+            
+            const isCurrentPeriod = 
+                currentDate >= startDate && 
+                currentDate <= endDate;
+            
+            const card = document.createElement('div');
+            card.className = `planet-card bg-white rounded-lg shadow p-6 ${isCurrentPeriod ? 'border-2 border-blue-500' : ''}`;
+            
+            card.innerHTML = `
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-3xl">${planetsInfo[planet].symbol}</span>
+                    <h3 class="text-xl font-bold">
+                        Período ${i + 1}: ${planet} (${currentYear})
+                        ${isCurrentPeriod ? '<span class="ml-2 text-sm text-blue-600">(Período Actual)</span>' : ''}
+                    </h3>
+                </div>
+                <p class="text-sm mb-4">
+                    ${startDate.toLocaleDateString('es-ES')} - ${endDate.toLocaleDateString('es-ES')}
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-medium text-green-600 mb-2">Aspectos Positivos:</h4>
+                        <p class="text-sm">${planetsInfo[planet].positive}</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-red-600 mb-2">Aspectos a Considerar:</h4>
+                        <p class="text-sm">${planetsInfo[planet].negative}</p>
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.appendChild(card);
+            
+            // Detener si hemos pasado al período anterior
+            if (i === currentPeriodIndex + 1) break;
         }
-    </script>
-    <!-- Resto del script original -->
-</body>
-</html>
+    }
+}
