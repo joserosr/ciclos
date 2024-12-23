@@ -17,7 +17,46 @@
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <h1 class="text-3xl font-bold text-center mb-8 text-blue-700">Bienvenido! Introduce tu día y més de cumpleaños y conoce los períodos de tu año Personal:</h1>
-        <!-- Resto del código HTML permanece igual -->
+        <div style="background-color: #f0f7ff; border: 1px solid #cce3ff; border-radius: 8px; padding: 16px; margin-bottom: 32px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+    <p style="color: #1e40af; margin: 0;">
+        ⭐ Este programa calcula tus periodos personales y resalta en azul el periodo actual en el que estás ⭐
+    </p>
+</div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                <select id="monthSelect" class="rounded border p-2">
+                    <option value="">Mes de nacimiento</option>
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+                
+                <select id="daySelect" class="rounded border p-2">
+                    <option value="">Día de nacimiento</option>
+                </select>
+                
+                <button 
+                    id="calculateButton"
+                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors"
+                >
+                    Calcular
+                </button>
+            </div>
+        </div>
+        
+        <div id="results" class="space-y-4"></div>
+    </div>
+    <!-- Resto del HTML original -->
 
     <script>
         // Llenar los días del mes
@@ -29,7 +68,45 @@
             daySelect.appendChild(option);
         }
 
-        // Resto del código de planetsInfo y planets permanece igual
+        const planetsInfo = {
+            Sol: {
+                symbol: "☉",
+                positive: "Período de liderazgo, vitalidad y creatividad. Excelente para iniciar proyectos y buscar reconocimiento.",
+                negative: "Posible tendencia al egocentrismo y exceso de orgullo. Cuidar la salud y el exceso de exposición."
+            },
+            Luna: {
+                symbol: "☽",
+                positive: "Incremento de la intuición y conexión emocional. Favorable para relaciones familiares y el hogar.",
+                negative: "Fluctuaciones emocionales y sensibilidad aumentada. Posible inestabilidad en el ánimo."
+            },
+            Marte: {
+                symbol: "♂",
+                positive: "Alta energía y determinación. Buen momento para actividades físicas y competencias.",
+                negative: "Riesgo de impulsividad y conflictos. Necesidad de controlar la agresividad."
+            },
+            Mercurio: {
+                symbol: "☿",
+                positive: "Excelente para comunicación y aprendizaje. Favorece negocios y estudios.",
+                negative: "Posible dispersión mental y nerviosismo. Cuidado con malentendidos."
+            },
+            Júpiter: {
+                symbol: "♃",
+                positive: "Expansión y abundancia. Favorable para crecimiento personal y espiritual.",
+                negative: "Riesgo de excesos y sobre-optimismo. Cuidado con gastos innecesarios."
+            },
+            Venus: {
+                symbol: "♀",
+                positive: "Período favorable para el amor, arte y placer. Mejora en relaciones personales.",
+                negative: "Tendencia a la indulgencia y comodidad excesiva. Posible procrastinación."
+            },
+            Saturno: {
+                symbol: "♄",
+                positive: "Tiempo de disciplina y logros duraderos. Buen momento para planificación a largo plazo.",
+                negative: "Posibles retrasos y obstáculos. Tendencia al pesimismo y soledad."
+            }
+        };
+
+        const planets = ["Sol", "Luna", "Marte", "Mercurio", "Júpiter", "Venus", "Saturno"];
 
         document.getElementById('calculateButton').addEventListener('click', () => {
             const month = parseInt(document.getElementById('monthSelect').value);
@@ -55,7 +132,7 @@
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
             
-            // Calcular períodos para el año anterior, actual y siguiente
+            // Años a mostrar: anterior, actual y siguiente
             const yearsToShow = [currentYear - 1, currentYear, currentYear + 1];
             
             yearsToShow.forEach(year => {
@@ -120,5 +197,6 @@
             });
         }
     </script>
+    <!-- Resto del script original -->
 </body>
 </html>
