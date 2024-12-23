@@ -10,7 +10,7 @@ function calculatePeriods(birthMonth, birthDay) {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
     
-    // Identificar el período actual
+    // Determinar el período actual
     let currentPeriodIndex = -1;
     
     planets.forEach((planet, index) => {
@@ -49,8 +49,8 @@ function calculatePeriods(birthMonth, birthDay) {
     // Mostrar períodos desde el actual hacia adelante hasta el anterior
     if (currentPeriodIndex !== -1) {
         for (let i = currentPeriodIndex; i < planets.length; i++) {
-            const yearBirthday = new Date(currentYear, birthMonth - 1, birthDay);
             const planet = planets[i];
+            const yearBirthday = new Date(currentYear, birthMonth - 1, birthDay);
             
             let startDate, endDate;
             
@@ -106,8 +106,8 @@ function calculatePeriods(birthMonth, birthDay) {
             
             resultsDiv.appendChild(card);
             
-            // Detener si hemos pasado al período anterior
-            if (i === currentPeriodIndex + 1) break;
+            // Detener si hemos llegado al período anterior al actual
+            if (i === currentPeriodIndex + 5) break;
         }
     }
 }
