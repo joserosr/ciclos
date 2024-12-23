@@ -55,21 +55,39 @@
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
             
-            // Calcular períodos desde la fecha actual hacia el futuro
-            let startYear = currentYear;
-            let endYear = 2100; // Ajusta este valor según tus necesidades
-
-            for (let year = startYear; year <= endYear; year++) {
+            // Calcular períodos para el año anterior, actual y siguiente
+            const yearsToShow = [currentYear - 1, currentYear, currentYear + 1];
+            
+            yearsToShow.forEach(year => {
                 const yearBirthday = new Date(year, birthMonth - 1, birthDay);
                 
                 planets.forEach((planet, index) => {
-                    const startDate = new Date(yearBirthday);
-                    startDate.setDate(yearBirthday.getDate() + (index * 52));
+                    let startDate, endDate;
                     
-                    const endDate = new Date(yearBirthday);
-                    endDate.setDate(yearBirthday.getDate() + ((index + 1) * 52 - 1));
+                    if (index === 0) {
+                        // Período 1 (Sol): desde el cumpleaños hasta 52 días después
+                        startDate = new Date(yearBirthday);
+                        endDate = new Date(yearBirthday);
+                        endDate.setDate(yearBirthday.getDate() + 52);
+                    } else if (index === 6) {
+                        // Período 7 (Saturno): desde 53 días antes del cumpleaños hasta un día antes
+                        startDate = new Date(yearBirthday);
+                        startDate.setDate(yearBirthday.getDate() - 53);
+                        endDate = new Date(yearBirthday);
+                        endDate.setDate(yearBirthday.getDate() - 1);
+                    } else {
+                        // Períodos intermedios
+                        startDate = new Date(yearBirthday);
+                        startDate.setDate(yearBirthday.getDate() + (index * 52));
+                        
+                        endDate = new Date(yearBirthday);
+                        endDate.setDate(yearBirthday.getDate() + ((index + 1) * 52 - 1));
+                    }
                     
-                    const isCurrentPeriod = currentDate >= startDate && currentDate <= endDate;
+                    const isCurrentPeriod = 
+                        currentDate >= startDate && 
+                        currentDate <= endDate && 
+                        year === currentYear;
                     
                     const card = document.createElement('div');
                     card.className = `planet-card bg-white rounded-lg shadow p-6 ${isCurrentPeriod ? 'border-2 border-blue-500' : ''}`;
@@ -99,7 +117,7 @@
                     
                     resultsDiv.appendChild(card);
                 });
-            }
+            });
         }
     </script>
 </body>
