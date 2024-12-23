@@ -12,16 +12,34 @@
         .planet-card:hover {
             transform: translateY(-5px);
         }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3px 0;
+        }
+        .video-wrapper {
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <h1 class="text-3xl font-bold text-center mb-8">Bienvenido! Introduce tu día y més de cumpleaños y conoce los períodos de tu año Personal:</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-blue-900">Bienvenido! Introduce tu día y mes de cumpleaños y conoce los períodos de tu año Personal:</h1>
         <div style="background-color: #f0f7ff; border: 1px solid #cce3ff; border-radius: 8px; padding: 16px; margin-bottom: 32px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
-    <p style="color: #1e40af; margin: 0;">
-        ⭐ Este programa calcula tus periodos personales y resalta en azul el periodo actual en el que estás ⭐
-    </p>
-</div>
+            <p style="color: #1e40af; margin: 0;">
+                ⭐ Este programa calcula tus periodos personales y resalta en azul el periodo actual en el que estás ⭐
+            </p>
+        </div>
         
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
             <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
@@ -56,85 +74,57 @@
         
         <div id="results" class="space-y-4"></div>
     </div>
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Centrado</title>
-    <style>
-        .video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
-        }
-        .video-wrapper {
-            width: 300px;
-            height: 300px;
-            position: relative;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-<body>
+
     <div class="video-container">
         <div class="video-wrapper">
             <iframe src="https://player.vimeo.com/video/1034038168?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Toma el control de tu vida con el poder del siete"></iframe>
         </div>
     </div>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-</body>
-</html>
-<div class="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg shadow-lg p-8 text-center">
-    <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-bold mb-4 text-purple-800">
-            <span class="mr-2">🌟</span>
-            ¡Profundiza en tu Viaje de Autoconocimiento!
-            <span class="ml-2">🌟</span>
-        </h2>
-        
-        <p class="text-lg mb-6 text-gray-700">
-            Gracias por tu interés en este tema. Te invito a saber más descargando tu 
-            <span class="font-bold text-purple-700">muestra gratuita</span> del ebook:
-        </p>
-        
-        <div class="text-xl font-bold text-purple-900 mb-8">
-            "Toma el Control de Tu Vida con el Poder del Siete" 
-            <span class="ml-2">📚</span>
-        </div>
-        
-        <div class="space-y-4">
-            <a href="https://hubs.ly/Q02ZMhlK0" 
-               target="_blank" 
-               class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
-                <span class="mr-2">🎁</span>
-                ¡Descarga tu Muestra Gratuita Aquí!
-            </a>
+
+    <div class="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg shadow-lg p-8 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-purple-800">
+                <span class="mr-2">🌟</span>
+                ¡Profundiza en tu Viaje de Autoconocimiento!
+                <span class="ml-2">🌟</span>
+            </h2>
             
-            <div class="mt-8 pt-6 border-t border-purple-200">
-                <p class="text-lg mb-4 text-purple-800">
-                    <span class="mr-2">💫</span>
-                    ¿Listo para la experiencia completa?
-                </p>
-                
-                <a href="https://pay.hotmart.com/P96594631U" 
+            <p class="text-lg mb-6 text-gray-700">
+                Gracias por tu interés en este tema. Te invito a saber más descargando tu 
+                <span class="font-bold text-purple-700">muestra gratuita</span> del ebook:
+            </p>
+            
+            <div class="text-xl font-bold text-purple-900 mb-8">
+                "Toma el Control de Tu Vida con el Poder del Siete" 
+                <span class="ml-2">📚</span>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="https://hubs.ly/Q02ZMhlK0" 
                    target="_blank" 
-                   class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
-                    <span class="mr-2">📖</span>
-                    Adquiere el eBook Completo
+                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
+                    <span class="mr-2">🎁</span>
+                    ¡Descarga tu Muestra Gratuita Aquí!
                 </a>
+                
+                <div class="mt-8 pt-6 border-t border-purple-200">
+                    <p class="text-lg mb-4 text-purple-800">
+                        <span class="mr-2">💫</span>
+                        ¿Listo para la experiencia completa?
+                    </p>
+                    
+                    <a href="https://pay.hotmart.com/P96594631U" 
+                       target="_blank" 
+                       class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transform hover:-translate-y-1 transition-all duration-200 shadow-lg">
+                        <span class="mr-2">📖</span>
+                        Adquiere el eBook Completo
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         // Llenar los días del mes
         const daySelect = document.getElementById('daySelect');
